@@ -106,6 +106,7 @@ def Charles():
 	for op in ops:
 		new = op(cube)
 		temp.append(new)
+		print(new, new.moves)
 	print("State array: {}".format(temp))
 	for state in temp:
 		print("State: {} Moves: {}".format(state, state.moves))
