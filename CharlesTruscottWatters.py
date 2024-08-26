@@ -41,6 +41,10 @@ class RubiksState(object):
 			new_flt = [temp_flb[2], temp_flb[1], temp_flb[0]]
 			new_flb = [temp_bld[2], temp_bld[1], temp_bld[0]]
 			new_bld = [temp_blt[2], temp_blt[1], temp_blt[0]]
+			self.blt = new_blt
+			self.flt = new_flt
+			self.bld = new_bld
+			self.flb = new_flb
 			side = RubiksState(new_flt, self.frt, new_flb, self.frb, new_blt, self.brt, new_bld, self.brd, self.moves)
 		return side
 	def Linv(self):
