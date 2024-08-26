@@ -33,7 +33,15 @@ class RubiksState(object):
 	def L2(self):
 		self.moves.append("L2")
 		for n in range(0, 1):
-			side = self.L1()
+			temp_blt = self.blt.copy()
+			temp_flt = self.flt.copy()
+			temp_bld = self.bld.copy()
+			temp_flb = self.flb.copy()
+			new_blt = [temp_flt[2], temp_flt[1], temp_flt[0]]
+			new_flt = [temp_flb[2], temp_flb[1], temp_flb[0]]
+			new_flb = [temp_bld[2], temp_bld[1], temp_bld[0]]
+			new_bld = [temp_blt[2], temp_blt[1], temp_blt[0]]
+			side = RubiksState(new_flt, self.frt, new_flb, self.frb, new_blt, self.brt, new_bld, self.brd, self.moves)
 		return side
 	def Linv(self):
 		temp_blt = self.blt.copy()
@@ -82,10 +90,19 @@ class RubiksState(object):
 			
 		def is_solved(self):
 			pass
+from queue import deque
 def Charles():
 	
 	""" flt, frt, flb, frb, blt, brt, bld, brd, moves """
 	cube = RubiksState(["G", "O", "W"], ["G", "R", "W"], ["G", "O", "Y"], ["Y", "B", "O"], ["B", "O", "W"], ["B", "R", "W"], ["R", "B", "Y"], ["Y", "R", "G"], [])
-	nextmove = cube.Linv()
-	print(nextmove, nextmove.moves)
+#	nextmove = cube.Linv()
+#	print(nextmove, nextmove.moves)
+	temp = []
+	ops = [lambda x: x.L1(), lambda x: x.L2(), lambda x: x.Linv()]
+	for op in ops:
+		new = op(cube)
+		temp.append(new)
+	print("State array: {}".format(temp))
+	for state in temp:
+		print("State: {} Moves: {}".format(state, state.moves))
 if __name__ == """__main__""": Charles()
