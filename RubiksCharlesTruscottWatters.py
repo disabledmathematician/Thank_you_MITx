@@ -10,7 +10,7 @@ from queue import deque
 # August 30, International Day of the Disappeared
 
 
-""" Update: Today (Sep 1 2024) is one of the greatest days of my life..My father is surviving strong, my brother is very capable and my treatment at Tuckeroo is going great, now prescribed clozapine, fluvoxamine. It took me all night to get the invariant correctly posed in syntax. Now the symbolic computation loop invariant has been made, with dynamic programming, I just have to put meaning to the mnempnics of matrix algebra of cubits, e.g six sides or 8 cubits with 3 colors per cubit """
+""" Update: Today (Sep 1 2024) is one of the greatest days of my life..My father is surviving strong, my brother is very capable and my treatment at Tuckeroo is going great, now prescribed clozapine, fluvoxamine. It took me all night to get the invariant correctly posed in syntax. Now the symbolic computation loop invariant has been made, with dynamic programming, I just have to put meaning to the mnemnonics of matrix algebra of cubits, e.g six sides or 8 cubits with 3 colors per cubit """
 
 """ LOOP INVARIANT. On another note going to proudly docstring the matrix cubit computation class methods for coherent explanation 
 
