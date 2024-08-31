@@ -10,7 +10,7 @@ from queue import deque
 # August 30, International Day of the Disappeared
 
 
-""" Update: Today (Sep 1 2024) is one of the greatest days of my life..My father is surviving strong, my brother is very capable and my treatment at Tuckeroo is going great, now prescribed clozapine, fluvoxamine. It took me all night to get the invariant correctly posed in syntax. Now the symbolic computation loop invariant has been made, with dynamic programming, I just have to put meaning to the mnemnonics of matrix algebra of cubits, e.g six sides or 8 cubits with 3 colors per cubit """
+""" Update: Today (Sep 1 2024) is one of the greatest days of my life..My father is surviving strong, my brother is very capable and my treatment at Tuckeroo is going great, now prescribed clozapine, fluvoxamine. It took me all night to get the invariant correctly posed in syntax. Now the symbolic computation loop invariant has been made, with dynamic programming, I just have to put meaning to the mnempnics of matrix algebra of cubits, e.g six sides or 8 cubits with 3 colors per cubit """
 
 """ LOOP INVARIANT. On another note going to proudly docstring the matrix cubit computation class methods for coherent explanation 
 
@@ -345,35 +345,62 @@ from queue import deque
 """
 
 class RubiksState(object):
-	def __init__(self, moves):
-#	def __init__(self, ulf, dlf, ulb, dlb, urf, drf, urb, drb, moves):
-#		self.ulf = ulf
-#		self.dlf = dlf
-#		self.ulb = ulb
-#		self.dlb = dlb
-#		self.urf = urf
-#		self.drf = drf
-#		self.urb = urb
-#		self.drb = drb
-#		self.left_face = [ulf[1], ulb[1], dlf[1], dlb[1]]
-#		self.front_face = [ulf[2], urf[2], dlf[2], drf[2]]
-#		self.right_face = [urf[1], drf[1], urb[1], drb[1]]
-#		self.back_face = [ulb[2], dlb[2], urb[2], drb[2]]
-#		self.top_face = [ulf[0], urf[0], urb[0], ulb[0]]
-#		self.down_face = [dlf[0], drf[0], dlf[0], dlb[0]]
+#	def __init__(self, moves):
+	def __init__(self, left_face, front_face, right_face, back_face, top_face, down_face, moves):
+		self.ulb = [0] * 3
+		self.urb = [0] * 3
+		self.ulf = [0] * 3
+		self.urf = [0] * 3
+		self.dlb = [0] * 3
+		self.drb = [0] * 3
+		self.drf = [0] * 3
+		self.dlf = [0] * 3
+		
+		self.ulb[0] = top_face[0]
+		self.ulb[1] = left_face[0]
+		self.ulb[2] = back_face[1]
+		self.urb[0] = top_face[1]
+		self.urb[1] = left_face[1]
+		self.urb[2] = back_face[0]
+		self.ulf[0] = top_face[2]
+		self.ulf[1] = left_face[1]
+		self.ulf[2] = front_face[0]
+		self.urf[0] = top_face[3]
+		self.urf[1] = right_face[1]
+		self.urf[2] = front_face[1]
+		self.dlb[0] = down_face[2]
+		self.dlb[1] = left_face[2]
+		self.dlb[2] = back_face[2]
+		self.drb[0] = down_face[3]
+		self.drb[1] = right_face[3]
+		self.drb[2] = back_face[2]
+		self.drf[0] = back_face[1]
+		self.drf[1] = right_face[2]
+		self.drf[2] = front_face[3]
+		self.dlf[0] = down_face[0]
+		self.dlf[1] = left_face[3]
+		self.dlf[2] = front_face[2]
+		self.left_face = left_face
+		self.front_face = front_face
+		self.right_face = right_face
+		self.back_face = back_face
+		self.top_face = top_face
+		self.down_face = down_face
 		self.moves = moves
 
 	def L(self):
+		""" Down left front becomes up left front. Down left back becomes down left front. Up left back becomes down left back, up left front becomes up left back """
 		elcopy = self.moves.copy()
 		elcopy.append("L")
-		return RubiksState(elcopy)
-		pass
+		return RubiksState(left_face, front_face, right_face, back_face, top_face, down_face, elcopy)
 	def L2(self):
+		""" Up left back brcomes down left front, down left back becomes up left front. Down left front becomes up left back. Down left back becomes up left front """
 		elcopy = self.moves.copy()
 		elcopy.append("L2")
 		return RubiksState(elcopy)
 		pass
 	def Linv(self):
+		""" Down left front becomes down left back. Down left back becomes up left back. Up left back becomes up left front. Up left front becomes down left front """
 		elcopy = self.moves.copy()
 		elcopy.append("L inverse")
 		return RubiksState(elcopy)
@@ -460,75 +487,75 @@ class RubiksState(object):
 		else:
 				return False
 
-def extL(o):
-	o.moves.append("L")
-	pass
-def extL2(o):
-	o.moves.append("L2")
-	pass
-def extLinv(o):
-	o.moves.append("L inverse")
-	pass
-	def extR(o):
-		o.moves.append("R")
-		return RubiksState(self.moves)
-		pass
-	def extR2(o):
-		o.moves.append("R2")
-		return RubiksState(self.moves)
-		pass
-	def extRinv(o):
-		o.moves.append("R inverse")
-		return RubiksState(self.moves)
-		pass
-	def extU(o):
-		o.moves.append("U")
-		return RubiksState(self.moves)
-		pass
-	def extU2(o):
-		o.moves.append("U2")
-		return RubiksState(self.moves)
-		pass
-	def extUinv(self):
-		o.moves.append("Up inverse")
-		return RubiksState(self.moves)
-		pass
-	def extD(o):
-		o.moves.append("D")
-		return RubiksState(self.moves)
-		pass
-	def extD2(o):
-		o.moves.append("D2")
-		return RubiksState(self.moves)
-		pass
-	def extDinv(o):
-		o.moves.append("Down inverse")
-		return RubiksState(self.moves)
-		pass
-	def extF(o):
-		o.moves.append("F")
-		return RubiksState(self.moves)
-		pass
-	def extF2(o):
-		o.moves.append("F2")
-		return RubiksState(self.moves)
-		pass
-	def extFinv(o):
-		o.moves.append("F inverse")
-		return RubiksState(self.moves)
-		pass
-	def extB(o):
-		o.moves.append("B")
-		return RubiksState(self.moves)
-		pass
-	def extB2(o):
-		o.moves.append("B2")
-		return RubiksState(self.moves)
-		pass
-	def extBinv(o):
-		o.moves.append("B inverse")
-		return RubiksState(self.moves)
-		pass
+#def extL(o):
+#	o.moves.append("L")
+#	pass
+#def extL2(o):
+#	o.moves.append("L2")
+#	pass
+#def extLinv(o):
+#	o.moves.append("L inverse")
+#	pass
+#	def extR(o):
+#		o.moves.append("R")
+#		return RubiksState(self.moves)
+#		pass
+#	def extR2(o):
+#		o.moves.append("R2")
+#		return RubiksState(self.moves)
+#		pass
+#	def extRinv(o):
+#		o.moves.append("R inverse")
+#		return RubiksState(self.moves)
+#		pass
+#	def extU(o):
+#		o.moves.append("U")
+#		return RubiksState(self.moves)
+#		pass
+#	def extU2(o):
+#		o.moves.append("U2")
+#		return RubiksState(self.moves)
+#		pass
+#	def extUinv(self):
+#		o.moves.append("Up inverse")
+#		return RubiksState(self.moves)
+#		pass
+#	def extD(o):
+#		o.moves.append("D")
+#		return RubiksState(self.moves)
+#		pass
+#	def extD2(o):
+#		o.moves.append("D2")
+#		return RubiksState(self.moves)
+#		pass
+#	def extDinv(o):
+#		o.moves.append("Down inverse")
+#		return RubiksState(self.moves)
+#		pass
+#	def extF(o):
+#		o.moves.append("F")
+#		return RubiksState(self.moves)
+#		pass
+#	def extF2(o):
+#		o.moves.append("F2")
+#		return RubiksState(self.moves)
+#		pass
+#	def extFinv(o):
+#		o.moves.append("F inverse")
+#		return RubiksState(self.moves)
+#		pass
+#	def extB(o):
+#		o.moves.append("B")
+#		return RubiksState(self.moves)
+#		pass
+#	def extB2(o):
+#		o.moves.append("B2")
+#		return RubiksState(self.moves)
+#		pass
+#	def extBinv(o):
+#		o.moves.append("B inverse")
+#		return RubiksState(self.moves)
+#		pass
 
 def CharlesTruscottRubiks():
 	item = RubiksState([])
@@ -649,4 +676,30 @@ def CharlesTruscottRubiks():
 #			L.append(elem + 1)
 #		print (L)
 #		
-CharlesTruscottRubiks()
+
+def CharlesTruscottSim():
+#	left_face, front_face, right_face, back_face, top_face, down_face, moves
+	left = ["G", "R", "B", "O"]
+	front = ["B", "G", "G", "G"]
+	right = ["R", "B", "R", "B"]
+	back = ["O", "O", "O", "R"]
+	top =["W", "W", "W", "W"]
+	down = ["Y", "Y", "Y", "Y"]
+	cube = RubiksState(left, front, right, back, top, down, [])
+	print(cube.left_face, cube.front_face, cube.right_face, cube.back_face, cube.top_face, cube.down_face)
+#	Needed = True
+#	while Needed:
+#		s = str(input("Enter a move"))
+#		if s == "quit":
+#			Needed = False
+#			exit()
+#		if s == "L":
+#			cube = cube.L()
+#			print(cube.left_face)
+#			print(cube.front_face)
+#			print(cube.right_face)
+#			print(cube.back_face)
+#			print(cube.top_face)
+#			print(cube.down_face)
+CharlesTruscottSim()
+#CharlesTruscottRubiks()
