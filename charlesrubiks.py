@@ -394,7 +394,7 @@ class RubiksState(object):
 		elcopy.append("L")
 		return RubiksState(left_face, front_face, right_face, back_face, top_face, down_face, elcopy)
 	def L2(self):
-		""" Up left back brcomes down left front, down left back becomes up left front. Down left front becomes up left back. Down left back becomes up left front """
+		""" Up left back becomes down left front, down left back becomes up left front. Down left front becomes up left back. Down left back becomes up left front """
 		elcopy = self.moves.copy()
 		elcopy.append("L2")
 		return RubiksState(elcopy)
